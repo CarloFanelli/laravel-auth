@@ -49,6 +49,12 @@
                                                         alt="">
                                                 @endif
                                             </td>
+                                            <td>
+
+                                                <a href="{{ route('admin.projects.show', $project->id) }}">show</a>
+                                                <a href="{{ route('admin.projects.edit', $project->id) }}">edit</a>
+
+                                            </td>
                                         </tr>
                                     @empty
                                         <h1>no projects here!</h1>
