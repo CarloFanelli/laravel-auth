@@ -39,12 +39,15 @@ class ProjectController extends Controller
         $val_data['slug'] = Str::slug($request->title, '-');
 
         if ($request->has('cover_image')) {
-            $path = Storage::put('placeholders', $request->cover_image);
+
+            $complete_path = Storage::put('placeholders', $request->cover_image);
+            $path = strstr($complete_path, '/');
             $val_data['cover_image'] = $path;
         }
 
+        //dd($val_data);
+        //dd(Project::create($val_data));
         Project::create($val_data);
-        dd($val_data);
 
         return to_route('admin.dashboard')->with('message', 'new project added');
     }

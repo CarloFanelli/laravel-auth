@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-6">
                         @if ($project->cover_image)
-                            <img class="img-fluid" src="{{ asset('storage/placeholders/' . $project->cover_image) }}"
+                            <img class="img-fluid" src="{{ asset('storage/placeholders' . $project->cover_image) }}"
                                 alt="">
                         @endif
                     </div>
