@@ -44,7 +44,8 @@
                                             <td>{{ $project->slug }}</td>
                                             <td>
                                                 @if ($project->cover_image)
-                                                    <img src="{{ asset('public/storage/placeholders/' . $project->cover_image) }}"
+                                                    <img class="img-fluid w-50"
+                                                        src="{{ asset('storage/placeholders/' . $project->cover_image) }}"
                                                         alt="">
                                                 @endif
                                             </td>
