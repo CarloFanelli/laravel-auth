@@ -32,21 +32,22 @@
                                         <th>ID</th>
                                         <th>TITLE</th>
                                         <th>SLUG</th>
+                                        <th>IMG</th>
                                         <th>ACTIONS</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
-                                    <tr class="table-primary">
-                                        <td scope="row">Item</td>
-                                        <td>Item</td>
-                                        <td>Item</td>
-                                    </tr>
-
                                     @forelse ($projects as $project)
                                         <tr class="table-primary">
                                             <td scope="row">{{ $project->id }}</td>
                                             <td>{{ $project->title }}</td>
-                                            <td>Item</td>
+                                            <td>{{ $project->slug }}</td>
+                                            <td>
+                                                @if ($project->cover_image)
+                                                    <img src="{{ asset('public/storage/placeholders/' . $project->cover_image) }}"
+                                                        alt="">
+                                                @endif
+                                            </td>
                                         </tr>
                                     @empty
                                         <h1>no projects here!</h1>
