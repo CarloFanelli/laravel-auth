@@ -79,6 +79,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        //dd($request);
 
         if ($request->has('cover_image')) {
             $complete_path = Storage::put('placeholders', $request->cover_image);
@@ -88,6 +89,10 @@ class ProjectController extends Controller
         if (!Str::is($project->getOriginal('title'), $request->title)) {
 
             $val_data['slug'] = $project->generateSlug($project->title);
+        }
+
+        if ($request->has('title')) {
+            $val_data['title'] = $request->title;
         }
 
         $project->update($val_data);

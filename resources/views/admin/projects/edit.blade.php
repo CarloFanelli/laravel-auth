@@ -19,9 +19,9 @@
     <div class="card shadow">
         <div class="card-body">
 
-            <form action="{{ route('admin.projects.edit', $project) }}" method="post" enctype="multipart/form-data">
-                @csrf
+            <form action="{{ route('admin.projects.update', $project) }}" method="post" enctype="multipart/form-data">
 
+                @csrf
                 @method('PUT')
 
                 <div class="mb-3">
@@ -37,7 +37,11 @@
                     </span>
                 @enderror
 
-                <div class="mb-3">
+                <div class="mb-3 ">
+                    <div>
+                        <img width="200" src="{{ asset('storage/placeholders/' . $project->cover_image) }}"
+                            alt="">
+                    </div>
                     <label for="cover_image" class="form-label">Choose file</label>
                     <input type="file" class="form-control" @error('cover_image') is-invalid @enderror name="cover_image"
                         id="cover_image" placeholder="choose a file" aria-describedby="fileHelp">

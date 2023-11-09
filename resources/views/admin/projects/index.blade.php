@@ -58,8 +58,8 @@
                                             </td>
                                             <td>
 
-                                                <a href="{{ route('admin.projects.show', $project->id) }}">show</a>
-                                                <a href="{{ route('admin.projects.edit', $project->id) }}">edit</a>
+                                                <a href="{{ route('admin.projects.show', $project) }}">show</a>
+                                                <a href="{{ route('admin.projects.edit', $project) }}">edit</a>
                                                 <!-- Modal trigger button -->
                                                 <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
                                                     data-bs-target="#modalId-{{ $project->id }}">
