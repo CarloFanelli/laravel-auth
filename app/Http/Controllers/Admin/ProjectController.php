@@ -18,7 +18,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::orderByDesc('id')->get();
+
 
         return view('admin.projects.index', compact('projects'));
     }
@@ -99,12 +100,13 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        //dd($project);
 
         if ($project->cover_image) {
             Storage::delete('placeholders/' . $project->cover_image);
         }
 
         $project->delete();
-        return to_route('admin.dashboard')->with('message', 'post deleted success!');
+        return to_route('admin.projects.index')->with('message', 'post deleted success!');
     }
 }

@@ -62,13 +62,13 @@
                                                 <a href="{{ route('admin.projects.edit', $project->id) }}">edit</a>
                                                 <!-- Modal trigger button -->
                                                 <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal"
-                                                    data-bs-target="#modalId">
+                                                    data-bs-target="#modalId-{{ $project->id }}">
                                                     delete
                                                 </button>
 
                                                 <!-- Modal Body -->
                                                 <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-                                                <div class="modal fade" id="modalId" tabindex="-1"
+                                                <div class="modal fade" id="modalId-{{ $project->id }}" tabindex="-1"
                                                     data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
                                                     aria-labelledby="modalTitleId" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm"
@@ -86,7 +86,7 @@
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
                                                                 <form
-                                                                    action="{{ route('admin.projects.destroy', $project) }}"
+                                                                    action="{{ route('admin.projects.destroy', $project->id) }}"
                                                                     method="post">
                                                                     @csrf
                                                                     @method('DELETE')
