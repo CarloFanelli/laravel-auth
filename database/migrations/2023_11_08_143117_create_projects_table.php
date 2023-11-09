@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('external_link')->nullable();
             $table->string('cover_image')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

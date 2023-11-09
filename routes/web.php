@@ -24,6 +24,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
+
+    Route::get('trash', [ProjectController::class, 'trashed'])->name('trash');
+    Route::put('trash/{project}/restore', [ProjectController::class, 'restoreTrashed'])->name('restore');
 });
 
 Route::middleware('auth')->prefix('admin')->group(function () {

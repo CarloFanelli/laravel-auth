@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
@@ -104,6 +106,25 @@ class ProjectController extends Controller
         return to_route('admin.projects.index',)->with('message', 'update with success');
     }
 
+    public function softDelete(Project $project)
+    {
+    }
+
+    public function trashed()
+    {
+
+        $trashed = Project::onlyTrashed()->orderByDesc('id')->paginate(5);
+
+        return view('admin.projects.deleted', compact('trashed'));
+    }
+
+    public function restoreTrashed(Project $project)
+    {
+        $restore_project = Project::whitTrashed()->where('id', '=', $project->id);
+
+        return to_route('admin.trash')->with('message', 'project restored!');
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -116,6 +137,7 @@ class ProjectController extends Controller
         }
 
         $project->delete();
+
         return to_route('admin.projects.index')->with('message', 'post deleted success!');
     }
 }

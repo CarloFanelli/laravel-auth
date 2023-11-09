@@ -93,6 +93,15 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item">
+
+                                <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.trash' ? 'bg-secondary' : '' }}"
+                                    href="{{ route('admin.trash') }}">
+                                    <i class="fa-solid fa-trash"></i> Deleted
+                                </a>
+                            </li>
+
+
                         </ul>
 
 
