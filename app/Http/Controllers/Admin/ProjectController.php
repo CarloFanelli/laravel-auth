@@ -142,7 +142,7 @@ class ProjectController extends Controller
             Storage::delete('placeholders/' . $project->cover_image);
         }
 
-        $project->delete();
+        $project->forceDelete();
 
         return to_route('admin.trash')->with('message', 'post deleted success!');
     }
