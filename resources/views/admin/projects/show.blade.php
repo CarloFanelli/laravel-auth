@@ -23,7 +23,8 @@
         </div>
         <div class="row mt-4">
             <div class="col-4 m-auto text-center">
-                <a class="btn btn-success" href="{{ route('admin.dashboard') }}">Back</a>
+                <a class="btn btn-info text-white" href="{{ route('admin.projects.index') }}">
+                    <i class="fa-solid fa-arrow-left"></i></a>
             </div>
         </div>
     </div>

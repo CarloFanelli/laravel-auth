@@ -18,7 +18,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::orderByDesc('id')->get();
+        $projects = Project::orderByDesc('id')->paginate(5);
 
 
         return view('admin.projects.index', compact('projects'));
@@ -95,9 +95,13 @@ class ProjectController extends Controller
             $val_data['title'] = $request->title;
         }
 
+        if ($request->has('external_link')) {
+            $val_data['external_link'] = $request->external_link;
+        }
+
         $project->update($val_data);
 
-        return to_route('admin.dashboard',)->with('message', 'update with success');
+        return to_route('admin.projects.index',)->with('message', 'update with success');
     }
 
     /**

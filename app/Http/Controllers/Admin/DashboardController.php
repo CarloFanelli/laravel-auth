@@ -11,9 +11,10 @@ class DashboardController extends Controller
     public function index()
     {
         //$projects = Project::orderByDesc('id')->get();
-        $projects = Project::all();
+        //$projects = Project::all();
 
 
-        return view('admin.projects.index', compact('projects'));
+        //return view('admin.projects.index', compact('projects'));
+        return view('admin.dashboard');
     }
 }

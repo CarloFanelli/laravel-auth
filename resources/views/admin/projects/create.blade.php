@@ -36,6 +36,19 @@
                 @enderror
 
                 <div class="mb-3">
+                    <label for="external_link" class="form-label">external link</label>
+                    <input type="text" name="external_link" id="external_link" class="form-control"
+                        @error('external_link') is-invalid @enderror placeholder="external_link"
+                        aria-describedby="helperexternal_link" value="{{ old('external_link') }}">
+                    <small id="helperexternal_link" class="text-muted">type your project link</small>
+                </div>
+                @error('external_link')
+                    <span class="text-danger">
+                        {{ message }}
+                    </span>
+                @enderror
+
+                <div class="mb-3">
                     <label for="cover_image" class="form-label">Choose file</label>
                     <input type="file" class="form-control" @error('cover_image') is-invalid @enderror name="cover_image"
                         id="cover_image" placeholder="choose a file" aria-describedby="fileHelp">

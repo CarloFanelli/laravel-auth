@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title', 50);
             $table->text('content');
             $table->string('slug');
+            $table->string('external_link')->nullable();
             $table->string('cover_image')->nullable();
             $table->timestamps();
         });

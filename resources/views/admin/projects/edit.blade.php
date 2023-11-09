@@ -37,6 +37,19 @@
                     </span>
                 @enderror
 
+                <div class="mb-3">
+                    <label for="external_link" class="form-label">external link</label>
+                    <input type="text" name="external_link" id="external_link" class="form-control"
+                        @error('external_link') is-invalid @enderror placeholder="external_link"
+                        aria-describedby="helperexternal_link" value="{{ old('external_link', $project->external_link) }}">
+                    <small id="helperexternal_link" class="text-muted">type your project link</small>
+                </div>
+                @error('title')
+                    <span class="text-danger">
+                        {{ message }}
+                    </span>
+                @enderror
+
                 <div class="mb-3 ">
                     <div>
                         <img width="200" src="{{ asset('storage/placeholders/' . $project->cover_image) }}"
