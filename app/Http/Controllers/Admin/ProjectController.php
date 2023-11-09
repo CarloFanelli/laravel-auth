@@ -112,15 +112,18 @@ class ProjectController extends Controller
 
     public function trashed()
     {
-
         $trashed = Project::onlyTrashed()->orderByDesc('id')->paginate(5);
 
         return view('admin.projects.deleted', compact('trashed'));
     }
 
-    public function restoreTrashed(Project $project)
+    public function restoreTrashed($slug)
     {
-        $restore_project = Project::whitTrashed()->where('id', '=', $project->id);
+        //dd($slug);
+
+        $project = Project::withTrashed()->where('slug', '=', $slug)->first();
+        //dd($project);
+        $project->restore();
 
         return to_route('admin.trash')->with('message', 'project restored!');
     }
@@ -128,8 +131,11 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy($slug)
     {
+        //dd($slug);
+        $project = Project::withTrashed()->where('slug', '=', $slug)->first();
+
         //dd($project);
 
         if ($project->cover_image) {
@@ -138,6 +144,6 @@ class ProjectController extends Controller
 
         $project->delete();
 
-        return to_route('admin.projects.index')->with('message', 'post deleted success!');
+        return to_route('admin.trash')->with('message', 'post deleted success!');
     }
 }

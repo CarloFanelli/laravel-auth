@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::get('trash', [ProjectController::class, 'trashed'])->name('trash');
     Route::put('trash/{project}/restore', [ProjectController::class, 'restoreTrashed'])->name('restore');
+    Route::delete('trash/{project}/destroy', [ProjectController::class, 'destroy'])->name('destroy');
 });
 
 Route::middleware('auth')->prefix('admin')->group(function () {

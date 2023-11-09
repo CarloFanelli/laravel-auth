@@ -64,8 +64,15 @@
                                                     href="{{ route('admin.projects.show', $trash) }}">
                                                     <i class="fa-solid fa-eye text-white"></i>
                                                 </a>
-                                                <a class="btn btn-warning" href="{{ route('admin.restore', $trash) }}">
-                                                    <i class="fa-solid fa-trash-can-arrow-up text-white"></i></a>
+
+                                                <form action="{{ route('admin.restore', $trash->slug) }}" method="post">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button class="btn btn-warning" type="submit">
+                                                        <i class="fa-solid fa-trash-can-arrow-up text-white"></i>
+                                                    </button>
+                                                </form>
+
                                                 <!-- Modal trigger button -->
                                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                     data-bs-target="#modalId-{{ $trash->id }}">
@@ -91,8 +98,7 @@
                                                             <div class="modal-footer justify-content-evenly">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
-                                                                <form
-                                                                    action="{{ route('admin.projects.destroy', $trash->slug) }}"
+                                                                <form action="{{ route('admin.destroy', $trash->slug) }}"
                                                                     method="post">
                                                                     @csrf
                                                                     @method('DELETE')
