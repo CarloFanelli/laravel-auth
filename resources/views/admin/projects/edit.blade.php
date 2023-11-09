@@ -1,22 +1,67 @@
-<div class="row align-items-md-stretch">
-    <div class="col-md-6">
-        <div class="h-100 p-5 text-white bg-primary border rounded-3">
-            <h2>Change the background</h2>
-            <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
-                mix and match with additional component themes and more.</p>
-            <button class="btn btn-outline-primary" type="button">Example button</button>
+@extends('layouts.admin')
+
+@section('content')
+    <h1>edit project: {{ $project->name }}</h1>
+
+    @if ($errors->any())
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong>Alert</strong>
+            <ul>
+
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="h-100 p-5 bg-primary border rounded-3">
-            <h2>Add borders</h2>
-            <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure
-                to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both
-                column's content for equal-height.</p>
-            <button
-                class="btn Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then,
-                mix and match with additional component themes and more."
-                type="button">Example button</button>
+    @endif
+
+    <div class="card shadow">
+        <div class="card-body">
+
+            <form action="{{ route('admin.projects.edit', $project) }}" method="post" enctype="multipart/form-data">
+                @csrf
+
+                @method('PUT')
+
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" id="title" class="form-control"
+                        @error('title') is-invalid @enderror placeholder="title" aria-describedby="helperTitle"
+                        value="{{ old('title', $project->title) }}">
+                    <small id="helperTitle" class="text-muted">type your project title max:50 characters</small>
+                </div>
+                @error('title')
+                    <span class="text-danger">
+                        {{ message }}
+                    </span>
+                @enderror
+
+                <div class="mb-3">
+                    <label for="cover_image" class="form-label">Choose file</label>
+                    <input type="file" class="form-control" @error('cover_image') is-invalid @enderror name="cover_image"
+                        id="cover_image" placeholder="choose a file" aria-describedby="fileHelp">
+                    <div id="fileHelp" class="form-text">add an image max 500kb</div>
+                </div>
+                @error('cover_image')
+                    <span class="text-danger">
+                        {{ message }}
+                    </span>
+                @enderror
+
+                <div class="mb-3">
+                    <label for="content" class="form-label">content</label>
+                    <textarea class="form-control" @error('content') is-invalid @enderror name="content" id="content" rows="3">{{ old('content', $project->content) }}</textarea>
+                </div>
+                @error('content')
+                    <span class="text-danger">
+                        {{ message }}
+                    </span>
+                @enderror
+
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
         </div>
+
     </div>
-</div>
+@endsection

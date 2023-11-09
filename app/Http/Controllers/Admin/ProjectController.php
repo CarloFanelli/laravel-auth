@@ -18,6 +18,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        $projects = Project::all();
+
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -67,6 +70,7 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -74,7 +78,20 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+
+        if ($request->has('cover_image')) {
+            $complete_path = Storage::put('placeholders', $request->cover_image);
+            $path = strstr($complete_path, '/');
+            $val_data['cover_image'] = $path;
+        }
+        if (!Str::is($project->getOriginal('title'), $request->title)) {
+
+            $val_data['slug'] = $project->generateSlug($project->title);
+        }
+
+        $project->update($val_data);
+
+        return to_route('admin.dashboard',)->with('message', 'update with success');
     }
 
     /**
@@ -82,6 +99,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+
+        if ($project->cover_image) {
+            Storage::delete('placeholders/' . $project->cover_image);
+        }
+
+        $project->delete();
+        return to_route('admin.dashboard')->with('message', 'post deleted success!');
     }
 }

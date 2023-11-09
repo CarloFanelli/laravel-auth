@@ -12,6 +12,6 @@ class DashboardController extends Controller
     {
         $projects = Project::all();
 
-        return view('admin.dashboard', compact('projects'));
+        return view('admin.projects.index', compact('projects'));
     }
 }
