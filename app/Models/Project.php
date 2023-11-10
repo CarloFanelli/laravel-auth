@@ -19,7 +19,6 @@ class Project extends Model
 
     public function generateSlug($title)
     {
-
         return Str::slug($title, '-');
     }
 }

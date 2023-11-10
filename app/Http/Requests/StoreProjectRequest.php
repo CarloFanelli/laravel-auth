@@ -26,7 +26,9 @@ class StoreProjectRequest extends FormRequest
             'title' => ['required', 'string', Rule::unique('projects')],
             'content' => ['nullable'],
             'cover_image' => ['nullable', 'image'],
-            'external_link' => ['nullable']
+            'git_link' => ['nullable'],
+            'project_link' => ['nullable']
+
 
         ];
     }

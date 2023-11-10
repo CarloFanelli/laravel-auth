@@ -55,7 +55,7 @@ class ProjectController extends Controller
         //dd(Project::create($val_data));
         Project::create($val_data);
 
-        return to_route('admin.dashboard')->with('message', 'new project added');
+        return to_route('admin.projects.index')->with('message', 'new project added');
     }
 
     /**
@@ -110,10 +110,6 @@ class ProjectController extends Controller
         return to_route('admin.projects.index',)->with('message', 'update with success');
     }
 
-    public function softDelete(Project $project)
-    {
-    }
-
     public function trashed()
     {
         $trashed = Project::onlyTrashed()->orderByDesc('id')->paginate(5);
@@ -136,6 +132,18 @@ class ProjectController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($slug)
+    {
+        //dd($slug);
+        $project = Project::withTrashed()->where('slug', '=', $slug)->first();
+
+        //dd($project);
+
+        $project->delete();
+
+        return to_route('admin.trash')->with('message', 'post deleted success!');
+    }
+
+    public function forceDelete($slug)
     {
         //dd($slug);
         $project = Project::withTrashed()->where('slug', '=', $slug)->first();
