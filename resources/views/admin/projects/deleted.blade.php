@@ -98,7 +98,8 @@
                                                             <div class="modal-footer justify-content-evenly">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-bs-dismiss="modal">Close</button>
-                                                                <form action="{{ route('admin.destroy', $trash->slug) }}"
+                                                                <form
+                                                                    action="{{ route('admin.forceDelete', $trash->slug) }}"
                                                                     method="post">
                                                                     @csrf
                                                                     @method('DELETE')

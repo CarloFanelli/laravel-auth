@@ -31,7 +31,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
     Route::delete('trash/{project}/destroy', [ProjectController::class, 'destroy'])->name('destroy');
 
-    Route::delete('trash/{project}/destroy', [ProjectController::class, 'forceDelete'])->name('destroy');
+    Route::delete('trash/{project}/destroy', [ProjectController::class, 'forceDelete'])->name('forceDelete');
 });
 
 Route::middleware('auth')->prefix('admin')->group(function () {
