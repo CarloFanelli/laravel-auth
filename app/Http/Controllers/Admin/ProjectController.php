@@ -97,8 +97,12 @@ class ProjectController extends Controller
             $val_data['title'] = $request->title;
         }
 
-        if ($request->has('external_link')) {
-            $val_data['external_link'] = $request->external_link;
+        if ($request->has('project_link')) {
+            $val_data['project_link'] = $request->project_link;
+        }
+
+        if ($request->has('git_link')) {
+            $val_data['git_link'] = $request->git_link;
         }
 
         $project->update($val_data);
