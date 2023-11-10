@@ -10,11 +10,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        //$projects = Project::orderByDesc('id')->get();
-        //$projects = Project::all();
+        $projects_counter = Project::count();
 
 
         //return view('admin.projects.index', compact('projects'));
-        return view('admin.dashboard');
+        return view('admin.dashboard', compact('projects_counter'));
     }
 }
